@@ -83,7 +83,7 @@ for(let i = 0; i < links.length; i++){
   })
 
   .then(csvFile => {
-    for (let i = 0; i < attributesValues; i++) {
+    for (let i = 0; i < attributesValues.length; i++) {
       file.write(attributesTitles[i] + '.')
       file.write(attributesValues[i] + '\n')
     }
@@ -91,4 +91,7 @@ for(let i = 0; i < links.length; i++){
   .then(() => console.log(attributesTitles))
   .catch(error => console.log('error'));
 }
-file.end()
+setTimeout(() => {
+  file.end();
+}, "5000");
+
