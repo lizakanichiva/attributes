@@ -64,45 +64,45 @@ for(let i = 0; i < links.length; i++){
       .replace(", кВт/год", "")
       .replace(", дБ", "")
       .replace(", кг", "")
+      .replace(", кВт/сутки", "")
+      .replace("60-80", "60-80%")
       .trim())
         })
       })
 
-  .then(remove => {
-    let removeElems = [
-    'Срок гарантии', '2 года',
-    "Производитель", 'Meyvel',
-    'EAN код', '4657764560217', '4657764560668', '4657764560187', '4657764560200', '4657764560194', '4657764560248', '4657764560163', '4657764560163', '4657764560224', '4657764560231'
-    ];
-    for(let i = 0; i < attributes.length; i++){ 
-      for(let a = 0; a < removeElems.length; a++){
-        if (attributes[i] === removeElems[a]) { 
-          attributes.splice(i, 1); 
-          i--
-        }
-      }
-    }
-  })
-
-  .then(titleAndValue => {
-    for (let i = 0; i < attributes.length; i += 2) {
-      attributesTitles.push(attributes[i]
-        .trim()
-        )
-      attributes[i+1] && attributesValues.push(attributes[i + 1]);
-    }
-  })
-
-  .then(csvFile => {
-    for (let i = 0; i < attributesValues.length; i++) {
-      file.write('id' + ',')
-      file.write(attributesTitles[i] + ',')
-      file.write(attributesValues[i] + '\n')
-    }
-  })
-  .then(() => console.log(attributesTitles))
   .catch(error => console.log('error'));
 }
+
 setTimeout(() => {
-  file.end();
+  let removeElems = [
+  'Срок гарантии', '2 года',
+    "Производитель", 'Meyvel',
+    'EAN код', '4657764560217', '4657764560668', '4657764560187', '4657764560200', '4657764560194', '4657764560248', '4657764560163', '4657764560163', '4657764560224', '4657764560231'
+  ];
+  for(let i = 0; i < attributes.length; i++){ 
+    for(let a = 0; a < removeElems.length; a++){
+      if (attributes[i] === removeElems[a]) { 
+          attributes.splice(i, 1); 
+          i--
+      }
+    }
+  }
+
+  for (let i = 0; i < attributes.length; i += 2) {
+    attributesTitles.push(attributes[i])
+    attributes[i+1] && attributesValues.push(attributes[i + 1]);
+  }
+
+ console.log(attributes);
+ console.log(attributesValues);
+ console.log(attributesTitles);
 }, "5000");
+
+setTimeout(() => {
+  for (let i = 0; i < attributesValues.length; i++) {
+    file.write('id' + ',')
+    file.write(attributesTitles[i] + ',')
+    file.write(attributesValues[i] + '\n')
+  }
+  file.end();
+}, "10000");
