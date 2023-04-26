@@ -40,8 +40,10 @@ for(let i = 0; i < links.length; i++){
       .replace('от +5 до +18', 'От +5 до +18°C')
       .replace('от +5 до +10', 'От +5 до +10°C')
       .replace('от +10 до +18', 'От +10 до +18°C')
-      .replace('Отдельстоящая,', 'Отдельстоящий,')
+      .replace('Отдельностоящая,', 'Отдельностоящий')
+      .replace('Отдельностоящая', 'Отдельностоящий')
       .replace('Встраиваемая', 'Встраиваемый')
+      .replace('Встраиваемая,', 'Встраиваемый')
       .replace('Компрессорное', 'Компрессорный')
       .replace('Макс. кол-во бутылок (бордо), шт.', 'Вместимость (бутылок)')
       .replace('Охлаждение', 'Тип охлаждения')
@@ -97,7 +99,7 @@ setTimeout(() => {
  console.log(attributes);
  console.log(attributesValues);
  console.log(attributesTitles);
-}, '5000');
+}, '10000');
 
 setTimeout(() => {
   let file = fs.createWriteStream('attributes.csv');
@@ -107,4 +109,4 @@ setTimeout(() => {
     file.write(attributesValues[i] + '\n')
   }
   file.end();
-}, '10000');
+}, '15000');
