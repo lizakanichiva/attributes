@@ -4,16 +4,22 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 
 let links =
-['https://limars.ru/vinnyj-shkaf/meyvel-mv141pro-kbt2/',
-'https://limars.ru/vinnyj-shkaf/meyvel-mv8-kst1/',
-'https://limars.ru/vinnyj-shkaf/meyvel-mv8-kbt1/',
-'https://limars.ru/vinnyj-shkaf/meyvel-mv18-kbt1/',
-'https://limars.ru/vinnyj-shkaf/meyvel-mv18-kst1/',
-'https://limars.ru/vinnyj-shkaf/meyvel-mv23-kbt2/',
-'https://limars.ru/vinnyj-shkaf/meyvel-mv89-kbb3/',
-'https://limars.ru/vinnyj-shkaf/meyvel-mv89-ksb3/',
-'https://limars.ru/vinnyj-shkaf/meyvel-mv163-kbt2/',
-'https://limars.ru/vinnyj-shkaf/meyvel-mv163-kst2/'];
+['https://limars.ru/sejfy/meyvel-sf5-310-200/',
+'https://limars.ru/sejfy/meyvel-sf5-350-250/',
+'https://limars.ru/sejfy/meyvel-sf5-430-195/',
+'https://limars.ru/sejfy/meyvel-sf8-430-195/',
+'https://limars.ru/sejfy/meyvel-sf9-480-150-drawer/',
+'https://limars.ru/sejfy/meyvel-sf8-430-195-white/',
+'https://limars.ru/sejfy/meyvel-sf10-450-200-drawer/',
+'https://limars.ru/sejfy/meyvel-sf3-430-200/',
+'https://limars.ru/sejfy/sejf-vstraivaemyj-safe-10-box/',
+'https://limars.ru/sejfy/sejf-safe-10-plus-smart/',
+'https://limars.ru/sejfy/sejf-vstraivaemyj-safe-30-box/',
+'https://limars.ru/sejfy/sejf-vstraivaemyj-safe-30-easy/',
+'https://limars.ru/sejfy/sejf-safe-30-p-plus-smart/',
+'https://limars.ru/sejfy/sejf-safe-30-plus-smart/',
+'https://limars.ru/sejfy/sejf-safe-35-plus-smart/'
+];
 
 let attributes = [];
 let attributesTitles = [];
@@ -34,37 +40,14 @@ for(let i = 0; i < links.length; i++){
       attributes.push($(elem)
       .text()
       .replace(/(\r\n|\n|\r|\t)/gm, '')
-      .replace('от +5 до +20', 'От +5 до +20°C')
-      .replace('от +5 до +12', 'От +5 до +12°C')
-      .replace('от +12 до +20', 'От +12 до +20°C')
-      .replace('от +5 до +18', 'От +5 до +18°C')
-      .replace('от +5 до +10', 'От +5 до +10°C')
-      .replace('от +10 до +18', 'От +10 до +18°C')
-      .replace('Отдельностоящая,', 'Отдельностоящий')
-      .replace('Отдельностоящая', 'Отдельностоящий')
-      .replace('Встраиваемая', 'Встраиваемый')
-      .replace('Встраиваемая,', 'Встраиваемый')
-      .replace('Компрессорное', 'Компрессорный')
-      .replace('Макс. кол-во бутылок (бордо), шт.', 'Вместимость (бутылок)')
-      .replace('Охлаждение', 'Тип охлаждения')
-      .replace('Температурные зоны', 'Кол-во температурных зон')
       .replace('Установка', 'Тип установки')
-      .replace('Вес нетто', 'Вес без упаковки')
-      .replace('Вес брутто', 'Вес с упаковкой')
-      .replace(', %', '')
-      .replace('Размер двери, (ВxШ)', 'Размер двери (В × Ш)')
-      .replace( 'Мин. размер ниши, (ВxШxГ)', 'Мин. размер ниши (В × Ш × Г)')
-      .replace('Размер упаковки, (ВxШxГ)', 'Размер упаковки (В × Ш × Г)')
-      .replace('Температура', 'Диапазон температур')
+      .replace('Вес нетто, кг', 'Вес без упаковки')
+      .replace('Вес брутто, кг', 'Вес с упаковкой')
+      .replace('Размер упаковки (ВxШxГ)', 'Габариты в упаковке (В × Ш × Г)')
+      .replace('х', '×')
+      .replace('х', '×')
       .replace(', л', '')
-      .replace(', °C', '')
-      .replace(', шт', '')
       .replace(', мм', '')
-      .replace(', кВт/год', '')
-      .replace(', дБ', '')
-      .replace(', кг', '')
-      .replace(', кВт/сутки', '')
-      .replace('60-80', '60-80%')
       .trim())
         })
       })
@@ -74,9 +57,11 @@ for(let i = 0; i < links.length; i++){
 
 setTimeout(() => {
   let removeElems = [
+  'Срок гарантии', '1 год',
   'Срок гарантии', '2 года',
   'Производитель', 'Meyvel',
-  'EAN код', '4657764560217', '4657764560668', '4657764560187', '4657764560200', '4657764560194', '4657764560248', '4657764560163', '4657764560163', '4657764560224', '4657764560231'
+  'Производитель', 'Indel B',
+  'EAN код', '4657764560255', '4657764560262', '4657764560279', '4657764560286', '4657764560309', '4657764560293', '4657764560316', '4657764560354'
   ];
   for(let i = 0; i < attributes.length; i++){ 
     for(let a = 0; a < removeElems.length; a++){
