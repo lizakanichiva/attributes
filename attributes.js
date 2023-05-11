@@ -26,6 +26,7 @@ let attributesTitles = [];
 let attributesValues = [];
 
 for(let i = 0; i < links.length; i++){
+  console.log(i)
   axios.get(links[i])
   .then(html => {       
     const $ = cheerio.load(html.data);
@@ -43,11 +44,14 @@ for(let i = 0; i < links.length; i++){
       .replace('Установка', 'Тип установки')
       .replace('Вес нетто, кг', 'Вес без упаковки')
       .replace('Вес брутто, кг', 'Вес с упаковкой')
+      .replace('Размер проёма двери (ВxШxГ)', 'Размер проёма двери (В × Ш × Г)')
+      .replace('Внутренние размеры (ВхШхГ)', 'Внутренние размеры (В × Ш × Г)')
       .replace('Размер упаковки (ВxШxГ)', 'Габариты в упаковке (В × Ш × Г)')
       .replace('х', '×')
-      .replace('х', '×')
+      .replace('x', '×')
       .replace(', л', '')
       .replace(', мм', '')
+      .replace(', шт.', '')
       .trim())
         })
       })
@@ -61,7 +65,6 @@ setTimeout(() => {
   'Срок гарантии', '2 года',
   'Производитель', 'Meyvel',
   'Производитель', 'Indel B',
-  'EAN код', '4657764560255', '4657764560262', '4657764560279', '4657764560286', '4657764560309', '4657764560293', '4657764560316', '4657764560354'
   ];
   for(let i = 0; i < attributes.length; i++){ 
     for(let a = 0; a < removeElems.length; a++){
